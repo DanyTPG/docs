@@ -23,7 +23,7 @@ timezone: Asia/Tehran
 
 title: Dany's Docs                          # the main title
 
-tagline: A place to document all the important stuff I might need   # it will display as the sub-title
+tagline: A place to document stuff I might need   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   A place to document code.
