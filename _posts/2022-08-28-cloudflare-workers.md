@@ -1,13 +1,14 @@
 ---
 title: cloudflare workers scripts
 date: 2022-08-28 12:00:00 +0330
-categories: [cloud functions, serverless]
+categories: [serverless, cloud functions]
 tags: [cloudflare-workers]     # TAG names should always be lowercase
 ---
 
+Aggregated some scripts that I use on cloudflare workers.
+
 # Reverse Proxy
 
-The script to reverse proxy to a website from cloudflare workers
 
 ```javascript
 addEventListener(
