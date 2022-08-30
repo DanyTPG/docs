@@ -24,11 +24,8 @@ we disable root logins with this command
 ```bash
 sudo passwd -l root 
 ```
-now we check if it is applied
-```bash
-grep root /etc/passwd
-```
-if the output is empty then root login is disabled successfully
+
+This will lock the password for the root user and you won’t be able to access the root account with its password until a new one is set.
 
 # Update and Upgrade the system
 
@@ -103,6 +100,10 @@ Uncomment these 2 fields and set them to no:
 ```
 PasswordAuthentication no
 ChallengeResponseAuthentication no
+```
+also to disable root account login:
+```
+PermitRootLogin no
 ```
 now we restart ssh
 ```bash
