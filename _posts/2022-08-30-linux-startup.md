@@ -105,9 +105,9 @@ also to disable root account login:
 ```
 PermitRootLogin no
 ```
-now we restart ssh
+now we restart ssh daemon
 ```bash
-sudo systemctl restart ssh
+sudo systemctl restart sshd
 ```
 
 # Configure Static IP
