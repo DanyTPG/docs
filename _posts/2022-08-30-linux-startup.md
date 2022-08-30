@@ -4,7 +4,7 @@ date: 2022-08-30 12:00:00 +0330
 categories: [Linux, Ubuntu]
 tags: [linux-preparation]     # TAG names should always be lowercase
 ---
-# Create new sudo user & disable root login
+# Create new sudo user
 first we create the user
 ```bash
 sudo adduser madman
