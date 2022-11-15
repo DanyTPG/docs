@@ -18,7 +18,7 @@ For caddy we can use `caddy:alpine` official docker image.
 
 the Caddyfile to use:
 
-```Caddyfile
+```sass
 matrix.example.com {
 	reverse_proxy /_matrix/* <conduit's container ip>:6167
 	header /.well-known/matrix/* Content-Type application/json
@@ -27,6 +27,7 @@ matrix.example.com {
 	respond /.well-known/matrix/client `{"m.homeserver":{"base_url":"https://matrix.example.com"},"m.identity_server":{"base_url":"https://identity.example.com"}}`
 }
 ```
+{: file='Caddyfile'}
 the `"m.identity_server"` is not mandatory.
 
 ## configure conduit
@@ -34,7 +35,7 @@ now for the conduit container.. first create a `conduit.toml` config file. sampl
 
 Then we launch the container:
 
-```bash
+```shell
 docker run -d --restart unless-stopped \
 -v db:/var/lib/matrix-conduit/ \
 -v /PATH/TO/conduit.toml:/etc/matrix-conduit/conduit.toml \
