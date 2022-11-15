@@ -20,7 +20,7 @@ the Caddyfile to use:
 
 ```shell
 matrix.example.com {
-	reverse_proxy /_matrix/* <conduit's container ip>:6167
+	reverse_proxy /_matrix/* <conduit-container-ip>:6167
 	header /.well-known/matrix/* Content-Type application/json
 	header /.well-known/matrix/* Access-Control-Allow-Origin *
 	respond /.well-known/matrix/server `{"m.server": "matrix.example.com:443"}`
