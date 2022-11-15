@@ -18,7 +18,7 @@ For caddy we can use `caddy:alpine` official docker image.
 
 the Caddyfile to use:
 
-```sass
+```shell
 matrix.example.com {
 	reverse_proxy /_matrix/* <conduit's container ip>:6167
 	header /.well-known/matrix/* Content-Type application/json
