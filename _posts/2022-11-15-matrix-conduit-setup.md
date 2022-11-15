@@ -30,8 +30,15 @@ matrix.example.com {
 {: file='Caddyfile'}
 the `"m.identity_server"` is not mandatory.
 
+now run the container:
+
+```shell
+docker run -d --network host --restart unless-stopped \
+-v /PATH/TO/Caddyfile:/etc/caddy/Caddyfile \
+--name caddy caddy:alpine
+```
 ## configure conduit
-now for the conduit container.. first create a `conduit.toml` config file. sample could be find at the official conduit repo at <https://gitlab.com/famedly/conduit/>
+now for the conduit container.. first create a `conduit.toml` config file. sample could be found at the official conduit repo at <https://gitlab.com/famedly/conduit/>
 
 Then we launch the container:
 
