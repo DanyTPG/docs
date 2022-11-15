@@ -31,7 +31,7 @@ matrix.example.com {
 the `"m.identity_server"` is not mandatory.
 
 ## configure conduit
-now for the conduit container.. first create a `conduit.toml` config file. sample could be find at the official conduit repo at https://gitlab.com/famedly/conduit/
+now for the conduit container.. first create a `conduit.toml` config file. sample could be find at the official conduit repo at <https://gitlab.com/famedly/conduit/>
 
 Then we launch the container:
 
