@@ -40,7 +40,7 @@ export default {
       return new Response(e);
     }
   }
-};
+}
 ```
 # Load Balance 301 Redirecting
 
