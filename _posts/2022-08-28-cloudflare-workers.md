@@ -148,6 +148,102 @@ addEventListener("fetch", event => {
   event.respondWith(handleRequest(event.request))
 })
 ```
+# IP detail by ipinfo.io with query
+
+```javascript
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request))
+})
+
+async function handleRequest(request) {
+  // Parse the IP address from the query string
+  const params = new URL(request.url).searchParams
+  const ip = params.get('ip')
+
+  if (!ip) {
+    // If no IP address is provided, return a form for the user to input an IP address
+    return new Response(`
+      <style>
+        body {
+          font-family: sans-serif;
+          text-align: center;
+          padding: 30px;
+        }
+        form {
+          display: inline-block;
+          margin-bottom: 20px;
+        }
+        label {
+          display: block;
+          margin-bottom: 5px;
+        }
+        input[type="text"] {
+          width: 250px;
+          font-size: 16px;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        button[type="submit"] {
+          font-size: 16px;
+          padding: 10px 20px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          background-color: #eee;
+          cursor: pointer;
+        }
+      </style>
+      <form>
+        <label>Enter an IP address:</label>
+        <input name="ip" type="text" />
+        <button type="submit">Submit</button>
+      </form>
+    `, {
+      headers: { 'Content-Type': 'text/html' }
+    })
+  } else {
+  // If an IP address is provided, query the IPinfo.io API for information about the IP
+  const response = await fetch(`https://ipinfo.io/${ip}?token=b3d0e25810cabb`)
+  const data = await response.json()
+
+  // Format the IP information in a user-friendly way
+  let output = `
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        padding: 30px;
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      p {
+        margin-bottom: 10px;
+      }
+      strong {
+        display: inline-block;
+        width: 120px;
+        font-weight: bold;
+      }
+    </style>
+    <h1>IP Information for ${ip}</h1>
+  `
+  output += `<p><strong>Hostname:</strong> ${data.hostname}</p>`
+  output += `<p><strong>Country:</strong> ${data.country}</p>`
+  output += `<p><strong>Region:</strong> ${data.region}</p>`
+  output += `<p><strong>City:</strong> ${data.city}</p>`
+  output += `<p><strong>Location:</strong> ${data.loc}</p>`
+  output += `<p><strong>Organization:</strong> ${data.org}</p>`
+  output += `<p><strong>Postal Code:</strong> ${data.postal}</p>`
+
+  // Return the formatted IP information as the response
+  return new Response(output, {
+    headers: { 'Content-Type': 'text/html' }
+  })
+}
+}
+```
 
 # DNS over HTTPS handler
 
