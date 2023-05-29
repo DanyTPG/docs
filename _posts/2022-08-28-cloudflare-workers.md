@@ -243,7 +243,7 @@ async function handleRequest(request) {
     });
   } else {
     // If an IP address is provided, query the IPinfo.io API for information about the IP
-    const response = await fetch(`https://ipinfo.io/${ip}?token=b3d0e25810cabb`);
+    const response = await fetch(`https://ipinfo.io/${ip}?token=00000000000000`); // replace the token with your own
     const data = await response.json();
 
     // Format the IP information in an HTML response
