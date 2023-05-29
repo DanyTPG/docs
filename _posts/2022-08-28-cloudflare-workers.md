@@ -152,22 +152,24 @@ addEventListener("fetch", event => {
 
 ```javascript
 addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event.request))
-})
+  event.respondWith(handleRequest(event.request));
+});
 
 async function handleRequest(request) {
-  // Parse the IP address from the query string
-  const params = new URL(request.url).searchParams
-  const ip = params.get('ip')
+  const url = new URL(request.url);
+  const params = new URLSearchParams(url.search);
+  const ip = params.get('ip');
 
   if (!ip) {
     // If no IP address is provided, return a form for the user to input an IP address
-    return new Response(`
+    const htmlOutput = `
       <style>
         body {
           font-family: sans-serif;
+          background-color: #1d4158;
           text-align: center;
           padding: 30px;
+          color: white;
         }
         form {
           display: inline-block;
@@ -193,55 +195,75 @@ async function handleRequest(request) {
           background-color: #eee;
           cursor: pointer;
         }
+        .result-container {
+          display: none;
+          white-space: nowrap;
+          background-color: #112836;
+          text-align: left;
+          color: white;
+          font-family: monospace;
+          font-size: 16px;
+          padding: 30px;
+          margin-top: 100px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+        }
+        strong {
+          display: inline-block;
+          width: 120px;
+          font-weight: bold;
+        }
       </style>
-      <form>
+      <form id="ipForm">
         <label>Enter an IP address:</label>
-        <input name="ip" type="text" />
+        <input id="ipInput" type="text" />
         <button type="submit">Submit</button>
-      </form>
-    `, {
+      </form><br>
+      <div id="resultContainer" class="result-container"></div>
+      <script>
+        document.getElementById('ipForm').addEventListener('submit', handleFormSubmit);
+        
+        function handleFormSubmit(event) {
+          event.preventDefault();
+          const ip = document.getElementById('ipInput').value;
+          fetch('/?ip=' + ip)
+            .then(response => response.text())
+            .then(result => {
+              const resultContainer = document.getElementById('resultContainer');
+              resultContainer.innerHTML = result;
+              resultContainer.style.display = 'inline-block'; // Show the result container
+            })
+            .catch(error => console.error(error));
+        }
+      </script>
+    `;
+
+    return new Response(htmlOutput, {
       headers: { 'Content-Type': 'text/html' }
-    })
+    });
   } else {
-  // If an IP address is provided, query the IPinfo.io API for information about the IP
-  const response = await fetch(`https://ipinfo.io/${ip}?token=b3d0e25810cabb`)
-  const data = await response.json()
+    // If an IP address is provided, query the IPinfo.io API for information about the IP
+    const response = await fetch(`https://ipinfo.io/${ip}?token=b3d0e25810cabb`);
+    const data = await response.json();
 
-  // Format the IP information in a user-friendly way
-  let output = `
-    <style>
-      body {
-        font-family: sans-serif;
-        text-align: center;
-        padding: 30px;
-      }
-      h1 {
-        margin-bottom: 20px;
-      }
-      p {
-        margin-bottom: 10px;
-      }
-      strong {
-        display: inline-block;
-        width: 120px;
-        font-weight: bold;
-      }
-    </style>
-    <h1>IP Information for ${ip}</h1>
-  `
-  output += `<p><strong>Hostname:</strong> ${data.hostname}</p>`
-  output += `<p><strong>Country:</strong> ${data.country}</p>`
-  output += `<p><strong>Region:</strong> ${data.region}</p>`
-  output += `<p><strong>City:</strong> ${data.city}</p>`
-  output += `<p><strong>Location:</strong> ${data.loc}</p>`
-  output += `<p><strong>Organization:</strong> ${data.org}</p>`
-  output += `<p><strong>Postal Code:</strong> ${data.postal}</p>`
+    // Format the IP information in an HTML response
+    let htmlOutput = `
+      <h1>IP Information for ${ip}</h1>
+    `;
+    htmlOutput += `<p><strong>Hostname:</strong> ${data.hostname}</p>`;
+    htmlOutput += `<p><strong>Country:</strong> ${data.country}</p>`;
+    htmlOutput += `<p><strong>Region:</strong> ${data.region}</p>`;
+    htmlOutput += `<p><strong>City:</strong> ${data.city}</p>`;
+    htmlOutput += `<p><strong>Location:</strong> ${data.loc}</p>`;
+    htmlOutput += `<p><strong>Organization:</strong> ${data.org}</p>`;
+    htmlOutput += `<p><strong>Postal Code:</strong> ${data.postal}</p>`;
+    
+    
 
-  // Return the formatted IP information as the response
-  return new Response(output, {
-    headers: { 'Content-Type': 'text/html' }
-  })
-}
+    return new Response(htmlOutput, {
+      headers: { 'Content-Type': 'text/html' }
+    });
+  }
 }
 ```
 
