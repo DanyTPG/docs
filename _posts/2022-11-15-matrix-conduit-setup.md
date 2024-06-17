@@ -2,18 +2,18 @@
 title: How to setup a conduit.rs Matrix server
 date: 2022-11-15 12:00:00 +0330
 categories: [Matrix, Conduit]
-tags: [conduit,matrix]     # TAG names should always be lowercase
+tags: [conduit,matrix]     ## TAG names should always be lowercase
 ---
 
 
-# Deploy using docker
+## Deploy using docker
 
 This tutorial will be for deployments using docker.
 
 We will need 2 containers. 
 First a caddy webserver and the other a conduit.rs matrix server.
 
-## configure caddy
+### configure caddy
 For caddy we can use `caddy:alpine` official docker image. 
 
 the Caddyfile to use:
@@ -37,7 +37,7 @@ docker run -d --network host --restart unless-stopped \
 -v /PATH/TO/Caddyfile:/etc/caddy/Caddyfile \
 --name caddy caddy:alpine
 ```
-## configure conduit
+### configure conduit
 now for the conduit container.. first create a `conduit.toml` config file. sample could be found at the official conduit repo at <https://gitlab.com/famedly/conduit/>
 
 Then we launch the container:

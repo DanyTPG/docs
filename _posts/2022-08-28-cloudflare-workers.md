@@ -2,12 +2,12 @@
 title: cloudflare workers scripts
 date: 2022-08-28 12:00:00 +0330
 categories: [serverless, cloud functions]
-tags: [cloudflare-workers]     # TAG names should always be lowercase
+tags: [cloudflare-workers]     ## TAG names should always be lowercase
 ---
 
 Aggregated some scripts that I use on cloudflare workers.
 
-# Reverse Proxy
+## Reverse Proxy
 
 
 ```javascript
@@ -23,7 +23,7 @@ addEventListener(
 )
 ```
 
-# General Reverse Proxy with this format "/host/path" 
+## General Reverse Proxy with this format "/host/path" 
 
 ```javascript
 export default {
@@ -42,7 +42,7 @@ export default {
   }
 }
 ```
-# Load Balance 301 Redirecting
+## Load Balance 301 Redirecting
 
 ```javascript
 const statusCode = 301;
@@ -69,7 +69,7 @@ addEventListener("fetch", async event => {
 })
 ```
 
-# Get your IP Address
+## Get your IP Address
 
 ```javascript
 addEventListener('fetch', event => {
@@ -87,7 +87,7 @@ async function handleRequest(request) {
 }
 ```
 
-# IP details by Cloudflare
+## IP details by Cloudflare
 
 
 ```javascript
@@ -128,7 +128,7 @@ async function handleRequest(request) {
 }
 ```
 
-# IP details by ipinfo.io
+## IP details by ipinfo.io
 
 ```javascript
 async function handleRequest(request) {
@@ -148,7 +148,7 @@ addEventListener("fetch", event => {
   event.respondWith(handleRequest(event.request))
 })
 ```
-# IP detail by ipinfo.io with query
+## IP detail by ipinfo.io with query
 
 ```javascript
 addEventListener('fetch', event => {
@@ -267,7 +267,7 @@ async function handleRequest(request) {
 }
 ```
 
-# DNS over HTTPS handler
+## DNS over HTTPS handler
 
 ```javascript
 addEventListener('fetch', function(event) {

@@ -2,9 +2,9 @@
 title: Things to do on a fresh linux installation
 date: 2022-08-30 12:00:00 +0330
 categories: [Linux, Ubuntu]
-tags: [linux-preparation]     # TAG names should always be lowercase
+tags: [linux-preparation]     ## TAG names should always be lowercase
 ---
-# Create new sudo user
+## Create new sudo user
 first we create the user
 ```bash
 sudo adduser madman
@@ -18,7 +18,7 @@ now we check if the user can run all commands
 sudo -l -U madman
 ```
 
-# Disable root login
+## Disable root login
 
 we disable root logins with this command
 ```bash
@@ -27,14 +27,14 @@ sudo passwd -l root
 
 This will lock the password for the root user and you won’t be able to access the root account with its password until a new one is set.
 
-# Update and Upgrade the system
+## Update and Upgrade the system
 
 ```bash
 sudo apt-get update -y && sudo apt-get upgrade -y
 ```
 and reboot the server (important).
 
-# Configure Automatic Upgrades
+## Configure Automatic Upgrades
 
 first install ```unattended-upgrades```
 
@@ -52,14 +52,14 @@ then we can check the config file
 sudo nano /etc/apt/apt.conf.d/20auto-upgrades
 ``` 
 
-# Install SSH server & configure key-based authentication
+## Install SSH server & configure key-based authentication
 
-## Install ssh server
+### Install ssh server
 we use ```openssh-server``` as our ssh-server
 ```bash
 sudo apt-get install openssh-server
 ```
-## configure key based authentication
+### configure key based authentication
 now we have to create an ssh key-pair on both the server and client machine.
 to do that we have to run this command:
 ```bash
@@ -87,7 +87,7 @@ nano ~/.ssh/authorized_keys
 ```
 paste and we're done.
 
-## Disable password based authentication
+### Disable password based authentication
 now that we have enabled key-based authentication it's logical that we disable password-based authentication for extra security.
 
 To do this have to edit the ssh daemon configuration file. 
@@ -110,7 +110,7 @@ now we restart ssh daemon
 sudo systemctl restart sshd
 ```
 
-# Configure Static IP
+## Configure Static IP
 ```bash
 sudo nano /etc/netplan/01-netcfg.yaml
 ```
@@ -132,7 +132,7 @@ apply the settings
 sudo netplan apply
 ```
 
-# hostname
+## hostname
 check hostname:
 ```bash
 hostnamectl
@@ -145,7 +145,7 @@ must also change in this file:
 ```bash
 sudo nano /etc/hosts
 ```
-# Timezone
+## Timezone
 
 check timezone:
 ```bash
@@ -162,7 +162,7 @@ change with menu:
 sudo dpkg-reconfigure tzdata 
 ```
 
-# Firewall
+## Firewall
 allow outgoing traffic by default:
 ```bash
 sudo ufw default allow outgoing
