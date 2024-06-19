@@ -32,7 +32,6 @@ This will lock the password for the root user and you won’t be able to access 
 ```bash
 sudo apt-get update -y && sudo apt-get upgrade -y
 ```
-and reboot the server (important).
 > It's important to reboot the server after this step.
 {: .prompt-warning }
 
@@ -61,7 +60,7 @@ We use `openssh-server` as our ssh-server
 ```bash
 sudo apt-get install openssh-server
 ```
-### configure key based authentication
+### Configure key based authentication
 Now we have to create an ssh key-pair on the client machine.
 to do that we have to run this command:
 ```bash
@@ -139,7 +138,7 @@ apply the settings
 sudo netplan apply
 ```
 
-## hostname
+## Hostname
 Check the current hostname:
 ```bash
 hostnamectl
