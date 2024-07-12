@@ -100,7 +100,7 @@ iptables -t nat -A POSTROUTING -o eth1 [...]
 iptables -t nat -A POSTROUTING -p tcp -s 192.168.1.2 \
    --sport 12345:12356 -d 123.123.123.123 --dport 22 [...]
 ```
-For most of the switches there exists a long form, e.g. --source instead of -s. Using them makes the whole instruction longer but more readable, especially if you are new to iptables.
+For most of the switches there exists a long form, e.g. `--source` instead of `-s`. Using them makes the whole instruction longer but more readable, especially if you are new to iptables.
 
 ### Actions for matched patterns
 Now that we have specified the packets we want, we need to choose the actions that will be applied to them. The actions for the NAT table include **SNAT**, **MASQUERADE**, **DNAT**, and **REDIRECT**, all of which will be preceded by `-j` to become meaningful.
@@ -164,7 +164,7 @@ iptables -t nat -A OUTPUT -p tcp --dport 80 \
        -j DNAT --to-destination 111.111.111.111:5002
 ```
 ### running a server behind a NAT router
-Let us assume that we have an HTTP server with IP `192.168.1.2` and our router has the IP address `192.168.1.1` and is connected to the internet over its second network interface with IP `1.1.1.1`. To reach the HTTP server from outside, type
+Let us assume that we have an HTTP server with IP `192.168.1.2` and our router has the IP address `192.168.1.1` and is connected to the internet over its second network interface with IP `1.1.1.1`. To reach the HTTP server from outside, type:
 ```shell
 # redirect http traffic to 192.168.1.2:
 iptables -t nat -A PREROUTING -p tcp -i eth1 --dport 80 -j DNAT --to 192.168.1.2
